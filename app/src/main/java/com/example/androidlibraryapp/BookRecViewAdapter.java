@@ -6,12 +6,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.transition.TransitionManager;
 
 import com.bumptech.glide.Glide;
 
@@ -47,6 +49,24 @@ public class BookRecViewAdapter extends RecyclerView.Adapter<BookRecViewAdapter.
                 Toast.makeText(context, books.get(position).getName()+"Selected", Toast.LENGTH_SHORT).show();
             }
         });
+
+        // Check on expanded layout
+        if(books.get(position).isExpaned())
+        {
+            TransitionManager.beginDelayedTransition(holder.parentCardView);
+            holder.exandedRelativeLayout.setVisibility(View.VISIBLE);
+            holder.downArrow.setVisibility(View.GONE);
+        }else
+        {
+            TransitionManager.beginDelayedTransition(holder.parentCardView);
+            holder.exandedRelativeLayout.setVisibility(View.GONE);
+            holder.downArrow.setVisibility(View.VISIBLE);
+
+        }
+
+        // Change text
+        holder.shortDesc.setText(books.get(position).getShortDesc());
+        holder.textAuthor.setText(books.get(position).getAuthor());
     }
 
     @Override
@@ -62,15 +82,45 @@ public class BookRecViewAdapter extends RecyclerView.Adapter<BookRecViewAdapter.
     // Implement ViewHolder class
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        CardView parentCardView;
-        TextView bookName;
-        ImageView bookImage;
+        private CardView parentCardView;
+        private TextView bookName, textAuthor, shortDesc;
+        private ImageView bookImage, downArrow, upArrow;
+
+        private RelativeLayout exandedRelativeLayout;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
             parentCardView = itemView.findViewById(R.id.parentCardView);
             bookName = itemView.findViewById(R.id.txtViewBookName);
             bookImage = itemView.findViewById(R.id.bookImage);
+            textAuthor = itemView.findViewById(R.id.textAuthor);
+            shortDesc = itemView.findViewById(R.id.shortDesc);
+            downArrow = itemView.findViewById(R.id.arrowDownImg);
+            upArrow = itemView.findViewById(R.id.arrowUpImg);
+            exandedRelativeLayout = itemView.findViewById(R.id.expandedRelativeLayout);
+
+            // Add fucntionality on downArrow to exand
+            downArrow.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    // We want to access isExpaned attribute
+                    Book book = books.get(getAdapterPosition()); // will get the book we are on.
+                    book.setExpaned(!book.isExpaned());
+                    notifyItemChanged(getAdapterPosition());
+                }
+
+            });
+
+            upArrow.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Book book = books.get(getAdapterPosition()); // will get the book we are on.
+                    book.setExpaned(!book.isExpaned());
+                    notifyItemChanged(getAdapterPosition());
+
+                }
+            });
 
         }
     }
