@@ -4,6 +4,7 @@ public class Book {
     // this is called POJO
     private int id, pages;
     private String name, ImageUrl, author, shortDesc, LongDesc;
+    private boolean isExpaned;
 
     public Book(int id, int pages, String name, String imageUrl, String author, String shortDesc, String longDesc) {
         this.id = id;
@@ -13,8 +14,16 @@ public class Book {
         this.author = author;
         this.shortDesc = shortDesc;
         LongDesc = longDesc;
+        isExpaned = false;
     }
 
+    public boolean isExpaned() {
+        return isExpaned;
+    }
+
+    public void setExpaned(boolean expaned) {
+        isExpaned = expaned;
+    }
 
     public int getId() {
         return id;
