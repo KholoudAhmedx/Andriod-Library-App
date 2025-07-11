@@ -49,6 +49,7 @@ public class BookRecViewAdapter extends RecyclerView.Adapter<BookRecViewAdapter.
             public void onClick(View view) {
                // Toast.makeText(context, books.get(position).getName()+"Selected", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(context, BookActivity.class);
+                intent.putExtra("bookId", books.get(position).getId()); // We need to pass the id of each book to display it when each book is clicked.
                 context.startActivity(intent);
             }
         });
