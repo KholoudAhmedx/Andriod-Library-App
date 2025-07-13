@@ -19,26 +19,12 @@ public class Utils {
         {
             AllBooks = new ArrayList<>();
             initData(); // Take it from the RecyclerView
-
-        } else if (CurrentlyReadingBooks == null) {
-
-            CurrentlyReadingBooks = new ArrayList<>();
-
         }
-        else if (WantToReadBooks == null)
-        {
 
-            WantToReadBooks = new ArrayList<>();
-
-        } else if (AlreadyReadBooks == null) {
-
-            AlreadyReadBooks = new ArrayList<>();
-
-        } else if (FavouriteBooks == null) {
-
-            FavouriteBooks = new ArrayList<>();
-
-        }
+        if (CurrentlyReadingBooks == null) { CurrentlyReadingBooks = new ArrayList<>();}
+        if (WantToReadBooks == null) { WantToReadBooks = new ArrayList<>(); }
+        if (AlreadyReadBooks == null) { AlreadyReadBooks = new ArrayList<>(); }
+        if (FavouriteBooks == null) { FavouriteBooks = new ArrayList<>();}
 
     }
 
@@ -101,5 +87,9 @@ public class Utils {
             }
         }
         return null;
+    }
+
+    public boolean AddBookToReadBooks(Book b){
+        return AlreadyReadBooks.add(b);
     }
 }
