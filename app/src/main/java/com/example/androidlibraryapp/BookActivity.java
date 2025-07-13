@@ -135,7 +135,7 @@ public class BookActivity extends AppCompatActivity {
         }
     }
 
-    private void handleWantToReadBooks(Book book){
+    private void handleWantToReadBooks(final Book book){
         ArrayList<Book> wantToReadBooksList = Utils.getInstance().getWantToReadBooks();
         boolean existInWantToReadList = false;
 
@@ -171,11 +171,75 @@ public class BookActivity extends AppCompatActivity {
 
     }
 
-    private void handleCurrentlyReadingBooks(Book book){
+    private void handleCurrentlyReadingBooks(final Book book){
+        ArrayList<Book> currentlyReadingBooksList = Utils.getInstance().getCurrentlyReadingBooks();
+        boolean existInCurrentlyReadingList = false;
+
+        for(Book b: currentlyReadingBooksList) {
+            if (b.getId() == book.getId()) {
+                existInCurrentlyReadingList = true;
+
+            }
+        }
+        if(existInCurrentlyReadingList)
+        {
+            //If book already exist in this list(marked as want to read)
+            AddToCurrentlyReading.setEnabled(false);
+        }
+        else {
+
+            // Add it to list
+            AddToCurrentlyReading.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if(Utils.getInstance().AddBookToCurrentlyReading(book)){
+                        Toast.makeText(BookActivity.this, "Book Added to list", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(BookActivity.this, CurrentlyReadingBooksActivity.class);
+                        startActivity(intent);
+                    }
+                    else{
+                        Toast.makeText(BookActivity.this, "Book was not added, Try again later.", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+
+        }
 
     }
 
-    private void handleFavouriteBooks(Book book){
+    private void handleFavouriteBooks(final Book book){
+        ArrayList<Book> favouriteBooksList = Utils.getInstance().getFavouriteBooks();
+        boolean existInFavouriteBooksList = false;
+
+        for(Book b: favouriteBooksList) {
+            if (b.getId() == book.getId()) {
+                existInFavouriteBooksList = true;
+
+            }
+        }
+        if(existInFavouriteBooksList)
+        {
+            //If book already exist in this list(marked as want to read)
+            AddToFavourites.setEnabled(false);
+        }
+        else {
+
+            // Add it to list
+            AddToFavourites.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if(Utils.getInstance().AddBookToFavouriteBooks(book)){
+                        Toast.makeText(BookActivity.this, "Book Added to list", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(BookActivity.this, FavouriteBooksActivity.class);
+                        startActivity(intent);
+                    }
+                    else{
+                        Toast.makeText(BookActivity.this, "Book was not added, Try again later.", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+
+        }
 
     }
 
