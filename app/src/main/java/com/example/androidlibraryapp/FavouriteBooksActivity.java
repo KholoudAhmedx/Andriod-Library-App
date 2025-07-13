@@ -33,7 +33,7 @@ public class FavouriteBooksActivity extends AppCompatActivity {
         });
 
         favouriteBooksRecyView = findViewById(R.id.favouriteBooksRecycView);
-        BookRecViewAdapter adapter = new BookRecViewAdapter(this);
+        BookRecViewAdapter adapter = new BookRecViewAdapter(this, "FavouriteBookActivity");
         favouriteBooksRecyView.setAdapter(adapter);
         favouriteBooksRecyView.setLayoutManager(new LinearLayoutManager(this));
 

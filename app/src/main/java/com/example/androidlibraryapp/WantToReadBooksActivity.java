@@ -36,7 +36,7 @@ public class WantToReadBooksActivity extends AppCompatActivity {
         });
 
         wantToReadRecyView = findViewById(R.id.wantToReadRecyViewer);
-        BookRecViewAdapter adapter = new BookRecViewAdapter(this);
+        BookRecViewAdapter adapter = new BookRecViewAdapter(this, "WantToReadBookActivity");
         wantToReadRecyView.setAdapter(adapter);
         wantToReadRecyView.setLayoutManager(new LinearLayoutManager(this));
 

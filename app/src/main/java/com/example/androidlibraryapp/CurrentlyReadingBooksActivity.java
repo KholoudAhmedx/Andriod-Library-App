@@ -34,7 +34,7 @@ public class CurrentlyReadingBooksActivity extends AppCompatActivity {
         });
 
         currentlyReadBooksRecycView = findViewById(R.id.currentlyReadingBooksRecyView);
-        BookRecViewAdapter adapter = new BookRecViewAdapter(this);
+        BookRecViewAdapter adapter = new BookRecViewAdapter(this,"CurrentlyReadingBookActivity");
         currentlyReadBooksRecycView.setAdapter(adapter);
         currentlyReadBooksRecycView.setLayoutManager(new LinearLayoutManager(this));
 

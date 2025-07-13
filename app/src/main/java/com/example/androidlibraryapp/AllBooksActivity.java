@@ -30,7 +30,7 @@ public class AllBooksActivity extends AppCompatActivity {
         // Initialize the recycler view
 
         // Create an adapter
-        adapter = new BookRecViewAdapter(this);
+        adapter = new BookRecViewAdapter(this, "AllBookActivity");
         booksRecView = findViewById(R.id.booksRecView);
 
         booksRecView.setAdapter(adapter);
