@@ -47,6 +47,14 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        btnWantToRead.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, WantToReadBooksActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private void initViews(){
