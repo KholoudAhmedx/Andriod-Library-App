@@ -1,5 +1,6 @@
 package com.example.androidlibraryapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.activity.EdgeToEdge;
@@ -16,6 +17,13 @@ public class WantToReadBooksActivity extends AppCompatActivity {
 
 
     RecyclerView wantToReadRecyView;
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(WantToReadBooksActivity.this, MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK); // To clear the stack where activities used are saved
+        startActivity(intent);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
