@@ -2,9 +2,12 @@ package com.example.androidlibraryapp;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,6 +16,8 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.bumptech.glide.Glide;
+
+import java.util.ArrayList;
 
 public class BookActivity extends AppCompatActivity {
 
@@ -45,7 +50,10 @@ public class BookActivity extends AppCompatActivity {
                 if(incomingBook != null)
                 {
                     setBookData(incomingBook);
+                    handleReadBooks(incomingBook);
+
                 }
+
             }
         }
 
@@ -77,4 +85,62 @@ public class BookActivity extends AppCompatActivity {
                 .into(bookImage);
 
     }
+
+    /**
+     Adding buttons functionalities
+     When Clicking on a button, we need to check the following:
+     - If the book already in the list, then disable the button
+     - If not, add it to the list and navigate the user to the list/page of the books**/
+
+    private void handleReadBooks(final Book book){
+        ArrayList<Book> readBooksList = Utils.getInstance().getAlreadyReadBooks();
+        boolean exsitAlreayInReadBooksList = false;
+
+        if(readBooksList !=null){
+            for(Book b: readBooksList)
+            {
+                // If book exists, then disable button
+                if(b.getId()== book.getId())
+                {
+                    exsitAlreayInReadBooksList = true;
+                }
+            }
+
+        }
+
+        if(exsitAlreayInReadBooksList)  { AddToRead.setEnabled(false); }
+        else {
+
+            // Add it to the list
+
+            AddToRead.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Log.d("ClickTest", "Button clicked!");
+                    if(Utils.getInstance().AddBookToReadBooks(book)){
+                        Toast.makeText(BookActivity.this, "Book Added to ReadList", Toast.LENGTH_SHORT).show();
+                        //Navigate the user to Read books activity
+                        Intent intent = new Intent(BookActivity.this, ReadBooksActivity.class);
+                        startActivity(intent);
+                    }
+                    else {
+                        Toast.makeText(BookActivity.this, "Book is not added, try again later.", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+        }
+    }
+
+//    private void handleWantToReadBooks(Book book){
+//
+//    }
+//
+//    private void handleCurrentlyReadingBooks(Book book){
+//
+//    }
+//
+//    private void handleFavouriteBooks(Book book){
+//
+//    }
+
 }
