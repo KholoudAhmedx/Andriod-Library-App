@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.webkit.URLUtil;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -51,6 +52,9 @@ public class BookActivity extends AppCompatActivity {
                 {
                     setBookData(incomingBook);
                     handleReadBooks(incomingBook);
+                    handleWantToReadBooks(incomingBook);
+                    handleCurrentlyReadingBooks(incomingBook);
+                    handleFavouriteBooks(incomingBook);
 
                 }
 
@@ -131,16 +135,48 @@ public class BookActivity extends AppCompatActivity {
         }
     }
 
-//    private void handleWantToReadBooks(Book book){
-//
-//    }
-//
-//    private void handleCurrentlyReadingBooks(Book book){
-//
-//    }
-//
-//    private void handleFavouriteBooks(Book book){
-//
-//    }
+    private void handleWantToReadBooks(Book book){
+        ArrayList<Book> wantToReadBooksList = Utils.getInstance().getWantToReadBooks();
+        boolean existInWantToReadList = false;
+
+        for(Book b: wantToReadBooksList) {
+            if (b.getId() == book.getId()) {
+                existInWantToReadList = true;
+
+            }
+        }
+        if(existInWantToReadList)
+        {
+            //If book already exist in this list(marked as want to read)
+            AddToWantToRead.setEnabled(false);
+        }
+        else {
+
+            // Add it to list
+            AddToWantToRead.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if(Utils.getInstance().AddBookToWantToRead(book)){
+                        Toast.makeText(BookActivity.this, "Book Added to list", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(BookActivity.this, WantToReadBooksActivity.class);
+                        startActivity(intent);
+                    }
+                    else{
+                        Toast.makeText(BookActivity.this, "Book was not added, Try again later.", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+
+        }
+
+    }
+
+    private void handleCurrentlyReadingBooks(Book book){
+
+    }
+
+    private void handleFavouriteBooks(Book book){
+
+    }
 
 }
