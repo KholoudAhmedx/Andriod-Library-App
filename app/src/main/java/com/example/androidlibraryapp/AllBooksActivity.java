@@ -1,8 +1,11 @@
 package com.example.androidlibraryapp;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.view.MenuItem;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -16,6 +19,7 @@ import java.util.ArrayList;
 public class AllBooksActivity extends AppCompatActivity {
     RecyclerView booksRecView;
     BookRecViewAdapter  adapter;
+    @SuppressLint("RestrictedApi")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,8 +31,11 @@ public class AllBooksActivity extends AppCompatActivity {
             return insets;
         });
 
-        // Initialize the recycler view
+//        // Add animation while transition between acitivities
+//        overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
 
+        // Add Button up to return to previous pages
+        //getSupportActionBar().setDefaultDisplayHomeAsUpEnabled(true);
         // Create an adapter
         adapter = new BookRecViewAdapter(this, "AllBookActivity");
         booksRecView = findViewById(R.id.booksRecView);
@@ -38,4 +45,25 @@ public class AllBooksActivity extends AppCompatActivity {
         adapter.setBooks(Utils.getInstance().getAllBooks());
 
     }
+
+//    @Override
+//    public void finish() {
+//        super.finish();
+//        overridePendingTransition(R.anim.slide_out, R.anim.slide_in);
+//
+//    }
+
+
+//    @Override
+//    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+//        switch (item.getItemId())
+//        {
+//            case android.R.id.home:
+//                onBackPressed();
+//                break;
+//            default:
+//                break;
+//        }
+//        return super.onOptionsItemSelected(item);
+//    }
 }
