@@ -15,23 +15,32 @@
         android:theme="@style/Theme.AndroidLibraryApp"
         tools:targetApi="31">
         <activity
-            android:name=".FavouriteBooksActivity"
+            android:name=".WebViewActivity"
             android:exported="false" />
+        <activity
+            android:name=".FavouriteBooksActivity"
+            android:exported="false"
+            android:label="@string/fav_books_activity"/>
         <activity
             android:name=".CurrentlyReadingBooksActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:label="@string/currently_reading_books_activity"/>
         <activity
             android:name=".WantToReadBooksActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:label="@string/want_to_read_books_activity"/>
         <activity
             android:name=".ReadBooksActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:label="@string/already_read_books_activity"/>
         <activity
             android:name=".BookActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:label="@string/book_details_activity"/>
         <activity
             android:name=".AllBooksActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:label="@string/all_books_activity"/>
         <activity
             android:name=".MainActivity"
             android:exported="true">
