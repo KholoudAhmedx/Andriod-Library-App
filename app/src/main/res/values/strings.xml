@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Android Library App</string>
+    <string name="all_books_activity">All Books</string>
+    <string name="already_read_books_activity">Read Books</string>
+    <string name="fav_books_activity">Favourite Books</string>
+    <string name="want_to_read_books_activity">Want to Read Books</string>
+    <string name="currently_reading_books_activity">Currently Reading Books</string>
+    <string name="book_details_activity">Book Details</string>
 </resources>
